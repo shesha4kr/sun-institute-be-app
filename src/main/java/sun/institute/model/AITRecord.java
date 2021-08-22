@@ -11,12 +11,13 @@ import javax.persistence.Id;
 public class AITRecord {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer recordId;
 	public String userName;
 	public Integer logicalMarks;
 	public Integer quantMarks;
 	public Integer gkMarks;
+	public Integer totalMarks;
 	public String mockTest;
 	public LocalDate dateOfExam;
 
@@ -24,8 +25,8 @@ public class AITRecord {
 		super();
 	}
 
-	public AITRecord(String userName, Integer logicalMarks, Integer quantMarks, Integer gkMarks,
-			String mockTest, LocalDate dateOfExam) {
+	public AITRecord(String userName, Integer logicalMarks, Integer quantMarks, Integer gkMarks, String mockTest,
+			LocalDate dateOfExam) {
 		super();
 		this.userName = userName;
 		this.logicalMarks = logicalMarks;
@@ -33,6 +34,7 @@ public class AITRecord {
 		this.gkMarks = gkMarks;
 		this.mockTest = mockTest;
 		this.dateOfExam = dateOfExam;
+		this.totalMarks = logicalMarks + quantMarks + gkMarks;
 	}
 
 	public Integer getRecordId() {
@@ -75,20 +77,28 @@ public class AITRecord {
 		this.gkMarks = gkMarks;
 	}
 
-	public String getTestNumber() {
-		return mockTest;
-	}
-
-	public void setTestNumber(String testNumber) {
-		this.mockTest = testNumber;
-	}
-
 	public LocalDate getDateOfExam() {
 		return dateOfExam;
 	}
 
 	public void setDateOfExam(LocalDate dateOfExam) {
 		this.dateOfExam = dateOfExam;
+	}
+
+	public Integer getTotalMarks() {
+		return totalMarks;
+	}
+
+	public void setTotalMarks(Integer totalMarks) {
+		this.totalMarks = totalMarks;
+	}
+
+	public String getMockTest() {
+		return mockTest;
+	}
+
+	public void setMockTest(String mockTest) {
+		this.mockTest = mockTest;
 	}
 
 }

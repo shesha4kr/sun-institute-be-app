@@ -1,8 +1,5 @@
 package sun.institute.controller;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import sun.institute.data.LoadDbData;
+import sun.institute.data.LoginSuccessDTO;
 import sun.institute.data.StudAuthDetails;
 import sun.institute.model.AITRecord;
 import sun.institute.model.StudentDetails;
@@ -27,35 +25,40 @@ public class LoginController {
 
 	@Autowired
 	IStudentDetailsRepo studentRepo;
-	
+
 	@Autowired
-	IAITRepo aitRepo;
-	
+	IAITRepo mockTestRepo;
+
 	@Autowired
 	LoadDbData loadDb;
-	
+
 	boolean requestCameFirstTime = true;
 
 	@PostMapping("/student")
-	public boolean authenticateStudent(@RequestBody StudAuthDetails stud) {
-		
+	public LoginSuccessDTO authenticateStudent(@RequestBody StudAuthDetails stud) {
+
 		loadDb.setDbData();
 
+		LoginSuccessDTO loginSuccessDetails = new LoginSuccessDTO();
+
 		StudentDetails studDetails = studentRepo.findByUserName(stud.getUserName());
-		System.out.println("STUD FROM DB:" + studDetails);
-		
-		if(studDetails != null && studDetails.password.equals(stud.getPassword())) {
-			return true;
+
+		if (studDetails != null && studDetails.password.equals(stud.getPassword())) {
+			
+			AITRecord record = mockTestRepo.findLatestMockTest(stud.getUserName()).get(0);
+			loginSuccessDetails.setValid(true);
+			loginSuccessDetails.setLatestTestDetails(record);
+			loginSuccessDetails.setTotalStudents(mockTestRepo.findTotalRecordsForAMocktest(record.getMockTest()));
+			loginSuccessDetails.setTotalStudentsBehind(mockTestRepo.findTotalStudentsBehind(record.getTotalMarks(), record.getMockTest()));
 		}
-		
-		return false;
+
+		return loginSuccessDetails;
 	}
 
-	
 	@GetMapping("/records")
 	public List<AITRecord> getRecords() {
 		loadDb.setDbData();
-		return (List<AITRecord>) aitRepo.findAll();
+		return (List<AITRecord>) mockTestRepo.findAll();
 	}
 
 }
