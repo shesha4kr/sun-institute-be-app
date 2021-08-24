@@ -38,6 +38,8 @@ public class LoginController {
 	public LoginSuccessDTO authenticateStudent(@RequestBody StudAuthDetails stud) {
 
 		loadDb.setDbData();
+		
+		System.out.println("Entered");
 
 		LoginSuccessDTO loginSuccessDetails = new LoginSuccessDTO();
 
@@ -48,9 +50,12 @@ public class LoginController {
 			AITRecord record = mockTestRepo.findLatestMockTest(stud.getUserName()).get(0);
 			loginSuccessDetails.setValid(true);
 			loginSuccessDetails.setLatestTestDetails(record);
+			loginSuccessDetails.setStudDetails(studDetails);
 			loginSuccessDetails.setTotalStudents(mockTestRepo.findTotalRecordsForAMocktest(record.getMockTest()));
 			loginSuccessDetails.setTotalStudentsBehind(mockTestRepo.findTotalStudentsBehind(record.getTotalMarks(), record.getMockTest()));
 		}
+		
+		System.out.println("Will send this:"+loginSuccessDetails);
 
 		return loginSuccessDetails;
 	}

@@ -101,4 +101,11 @@ public class AITRecord {
 		this.mockTest = mockTest;
 	}
 
+	@Override
+	public String toString() {
+		return "AITRecord [recordId=" + recordId + ", userName=" + userName + ", logicalMarks=" + logicalMarks
+				+ ", quantMarks=" + quantMarks + ", gkMarks=" + gkMarks + ", totalMarks=" + totalMarks + ", mockTest="
+				+ mockTest + ", dateOfExam=" + dateOfExam + "]";
+	}
+
 }

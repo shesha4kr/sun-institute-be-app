@@ -12,7 +12,7 @@ public class StudentDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer studId; 
+	public Integer studId;
 	public String firstName;
 	public String lastName;
 	public String userName;
@@ -27,8 +27,8 @@ public class StudentDetails {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.userName = "SI-" + firstName.substring(0, 3) + "-" + lastName.substring(0, 3) + "-"
-				+ dob.getDayOfMonth() + dob.getMonthValue() + dob.getYear();
+		this.userName = "SI-" + firstName.substring(0, 3) + "-" + lastName.substring(0, 3) + "-" + dob.getDayOfMonth()
+				+ dob.getMonthValue() + dob.getYear();
 		this.password = dob.getDayOfMonth() + "-" + dob.getMonthValue() + "-" + dob.getYear();
 		this.dob = dob;
 	}
@@ -79,6 +79,12 @@ public class StudentDetails {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	@Override
+	public String toString() {
+		return "StudentDetails [studId=" + studId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", userName=" + userName + ", password=" + password + ", dob=" + dob + "]";
 	}
 
 }

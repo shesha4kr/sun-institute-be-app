@@ -31,4 +31,9 @@ public class StudAuthDetails {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		return "StudAuthDetails [userName=" + userName + ", password=" + password + "]";
+	}
+
 }

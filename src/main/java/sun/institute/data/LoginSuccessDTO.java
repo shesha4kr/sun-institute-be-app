@@ -1,11 +1,13 @@
 package sun.institute.data;
 
 import sun.institute.model.AITRecord;
+import sun.institute.model.StudentDetails;
 
 public class LoginSuccessDTO {
 
 	boolean isValid = false;
 	AITRecord latestTestDetails;
+	StudentDetails studDetails;
 	Integer totalStudents;
 	Integer totalStudentsBehind;
 
@@ -13,11 +15,12 @@ public class LoginSuccessDTO {
 		super();
 	}
 
-	public LoginSuccessDTO(boolean isValid, AITRecord latestTestDetails, Integer totalStudents,
-			Integer totalStudentsBehind) {
+	public LoginSuccessDTO(boolean isValid, AITRecord latestTestDetails, StudentDetails studDetails,
+			Integer totalStudents, Integer totalStudentsBehind) {
 		super();
 		this.isValid = isValid;
 		this.latestTestDetails = latestTestDetails;
+		this.studDetails = studDetails;
 		this.totalStudents = totalStudents;
 		this.totalStudentsBehind = totalStudentsBehind;
 	}
@@ -52,6 +55,21 @@ public class LoginSuccessDTO {
 
 	public void setTotalStudentsBehind(Integer totalStudentsBehind) {
 		this.totalStudentsBehind = totalStudentsBehind;
+	}
+
+	public StudentDetails getStudDetails() {
+		return studDetails;
+	}
+
+	public void setStudDetails(StudentDetails studDetails) {
+		this.studDetails = studDetails;
+	}
+
+	@Override
+	public String toString() {
+		return "LoginSuccessDTO [isValid=" + isValid + ", latestTestDetails=" + latestTestDetails + ", studDetails="
+				+ studDetails + ", totalStudents=" + totalStudents + ", totalStudentsBehind=" + totalStudentsBehind
+				+ "]";
 	}
 
 }
