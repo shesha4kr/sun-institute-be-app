@@ -12,12 +12,12 @@ public class StudentDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer studId;
-	public String firstName;
-	public String lastName;
-	public String userName;
-	public String password;
-	public LocalDate dob;
+	private Integer studId;
+	private String firstName;
+	private String lastName;
+	private String userName;
+	private String password;
+	private LocalDate dob;
 
 	public StudentDetails() {
 		super();

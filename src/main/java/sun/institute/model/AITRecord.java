@@ -13,14 +13,14 @@ public class AITRecord {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer recordId;
-	public String userName;
-	public Integer logicalMarks;
-	public Integer quantMarks;
-	public Integer gkMarks;
-	public Integer totalMarks;
-	public String mockTest;
-	public LocalDate dateOfExam;
+	private Integer recordId;
+	private Integer studId;
+	private Integer logicalMarks;
+	private Integer quantMarks;
+	private Integer gkMarks;
+	private Integer totalMarks;
+	private String mockTest;
+	private LocalDate dateOfExam;
 
 	@Transient
 	public Integer totalStudents;
@@ -32,10 +32,10 @@ public class AITRecord {
 		super();
 	}
 
-	public AITRecord(String userName, Integer logicalMarks, Integer quantMarks, Integer gkMarks, String mockTest,
+	public AITRecord(Integer studId, Integer logicalMarks, Integer quantMarks, Integer gkMarks, String mockTest,
 			LocalDate dateOfExam) {
 		super();
-		this.userName = userName;
+		this.studId = studId;
 		this.logicalMarks = logicalMarks;
 		this.quantMarks = quantMarks;
 		this.gkMarks = gkMarks;
@@ -52,12 +52,12 @@ public class AITRecord {
 		this.recordId = recordId;
 	}
 
-	public String getUserName() {
-		return userName;
+	public Integer getStudId() {
+		return studId;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setStudId(Integer studId) {
+		this.studId = studId;
 	}
 
 	public Integer getLogicalMarks() {
@@ -126,7 +126,7 @@ public class AITRecord {
 
 	@Override
 	public String toString() {
-		return "AITRecord [recordId=" + recordId + ", userName=" + userName + ", logicalMarks=" + logicalMarks
+		return "AITRecord [recordId=" + recordId + ", studId=" + studId + ", logicalMarks=" + logicalMarks
 				+ ", quantMarks=" + quantMarks + ", gkMarks=" + gkMarks + ", totalMarks=" + totalMarks + ", mockTest="
 				+ mockTest + ", dateOfExam=" + dateOfExam + ", totalStudents=" + totalStudents + ", totalStudBehind="
 				+ totalStudBehind + "]";

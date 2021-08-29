@@ -37,22 +37,29 @@ public class StudentController {
 		return (List<StudentDetails>) studentRepo.findAll();
 	}
 
-	@GetMapping("/{userName}")
-	public List<AITRecord> getExamsByUserName(@PathVariable String userName) {
+	@GetMapping("/exam/{studId}")
+	public List<AITRecord> getLatestExam(@PathVariable Integer studId) {
 		loadDb.setDbData();
 		List<AITRecord> listOfExams = new ArrayList<>();
-		listOfExams = aitRepo.findExamByUserName(userName);
-		fetchExtraDetails(listOfExams);
+		AITRecord latestExam = fetchExams(Integer.valueOf(studId)).get(0);
+		listOfExams.add(latestExam);
 		return listOfExams;
 	}
+	
+	@GetMapping("/exams/{studId}")
+	public List<AITRecord> getAllExams(@PathVariable Integer studId) {
+		loadDb.setDbData();
+		return fetchExams(studId);
+	}
 
-	public void fetchExtraDetails(List<AITRecord> listOfExams) {
-
-		for (AITRecord exam : listOfExams) {
+	public List<AITRecord> fetchExams(Integer studId) {
+		List<AITRecord> listOfExams = new ArrayList<>();
+		listOfExams = aitRepo.findExamsByStudId(studId);	
+		
+		for(AITRecord exam : listOfExams) {
 			exam.setTotalStudents(aitRepo.findTotalRecordsForAMocktest(exam.getMockTest()));
 			exam.setTotalStudBehind(aitRepo.findTotalStudentsBehind(exam.getTotalMarks(), exam.getMockTest()));
 		}
-
+		return listOfExams;
 	}
-
 }

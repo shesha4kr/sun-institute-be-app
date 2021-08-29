@@ -25,12 +25,10 @@ public class LoadDbData {
 
 	public void setDbData() {
 		if (requestCameFirstTime) {
-
+			
 			requestCameFirstTime = false;
-
 			loadStudentDetailsDb();
 			loadAITRecordsDb();
-
 		}
 	}
 
@@ -46,21 +44,21 @@ public class LoadDbData {
 	}
 
 	private void loadAITRecordsDb() {
-		AITRecord rec1 = new AITRecord("SI-She-Kum-861997", 87, 88, 55, "AIT1", getExamDate("AIT1"));
-		AITRecord rec2 = new AITRecord("SI-She-Kum-861997", 88, 83, 58, "AIT2", getExamDate("AIT2"));
-		AITRecord rec3 = new AITRecord("SI-She-Kum-861997", 78, 70, 34, "AIT3", getExamDate("AIT3"));
+		AITRecord rec1 = new AITRecord(1, 87, 88, 55, "AIT1", getExamDate("AIT1"));
+		AITRecord rec2 = new AITRecord(1, 88, 83, 58, "AIT2", getExamDate("AIT2"));
+		AITRecord rec3 = new AITRecord(1, 78, 70, 34, "AIT3", getExamDate("AIT3"));
 
-		AITRecord rec4 = new AITRecord("SI-Vai-Dha-861997", 78, 88, 56, "AIT1", getExamDate("AIT1"));
-		AITRecord rec5 = new AITRecord("SI-Vai-Dha-861997", 98, 67, 55, "AIT2", getExamDate("AIT2"));
-		AITRecord rec6 = new AITRecord("SI-Vai-Dha-861997", 49, 37, 23, "AIT3", getExamDate("AIT3"));
+		AITRecord rec4 = new AITRecord(2, 78, 88, 56, "AIT1", getExamDate("AIT1"));
+		AITRecord rec5 = new AITRecord(2, 98, 67, 55, "AIT2", getExamDate("AIT2"));
+		AITRecord rec6 = new AITRecord(2, 49, 37, 23, "AIT3", getExamDate("AIT3"));
 
-		AITRecord rec7 = new AITRecord("SI-Har-Jay-861997", 67, 87, 45, "AIT1", getExamDate("AIT1"));
-		AITRecord rec8 = new AITRecord("SI-Har-Jay-861997", 29, 19, 44, "AIT2", getExamDate("AIT2"));
-		AITRecord rec9 = new AITRecord("SI-Har-Jay-861997", 92, 94, 89, "AIT3", getExamDate("AIT3"));
+		AITRecord rec7 = new AITRecord(3, 67, 87, 45, "AIT1", getExamDate("AIT1"));
+		AITRecord rec8 = new AITRecord(3, 29, 19, 44, "AIT2", getExamDate("AIT2"));
+		AITRecord rec9 = new AITRecord(3, 92, 94, 89, "AIT3", getExamDate("AIT3"));
 
-		AITRecord rec10 = new AITRecord("SI-Pin-Ban-861997", 69, 69, 66, "AIT1", getExamDate("AIT1"));
-		AITRecord rec11 = new AITRecord("SI-Pin-Ban-861997", 77, 71, 76, "AIT2", getExamDate("AIT2"));
-		AITRecord rec12 = new AITRecord("SI-Pin-Ban-861997", 87, 88, 55, "AIT3", getExamDate("AIT3"));
+		AITRecord rec10 = new AITRecord(4, 69, 69, 66, "AIT1", getExamDate("AIT1"));
+		AITRecord rec11 = new AITRecord(4, 77, 71, 76, "AIT2", getExamDate("AIT2"));
+		AITRecord rec12 = new AITRecord(4, 87, 88, 55, "AIT3", getExamDate("AIT3"));
 
 		aitRepo.saveAll(new ArrayList<>(
 				Arrays.asList(rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, rec9, rec10, rec11, rec12)));

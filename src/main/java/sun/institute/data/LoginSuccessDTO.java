@@ -1,28 +1,20 @@
 package sun.institute.data;
 
-import sun.institute.model.AITRecord;
-import sun.institute.model.StudentDetails;
-
 public class LoginSuccessDTO {
 
 	boolean isValid = false;
-	AITRecord latestTestDetails;
-	StudentDetails studDetails;
-	Integer totalStudents;
-	Integer totalStudentsBehind;
+	String userName;
+	Integer studId;
 
 	public LoginSuccessDTO() {
 		super();
 	}
 
-	public LoginSuccessDTO(boolean isValid, AITRecord latestTestDetails, StudentDetails studDetails,
-			Integer totalStudents, Integer totalStudentsBehind) {
+	public LoginSuccessDTO(boolean isValid, String userName, Integer studId) {
 		super();
 		this.isValid = isValid;
-		this.latestTestDetails = latestTestDetails;
-		this.studDetails = studDetails;
-		this.totalStudents = totalStudents;
-		this.totalStudentsBehind = totalStudentsBehind;
+		this.userName = userName;
+		this.studId = studId;
 	}
 
 	public boolean isValid() {
@@ -33,43 +25,25 @@ public class LoginSuccessDTO {
 		this.isValid = isValid;
 	}
 
-	public AITRecord getLatestTestDetails() {
-		return latestTestDetails;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setLatestTestDetails(AITRecord latestTestDetails) {
-		this.latestTestDetails = latestTestDetails;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public Integer getTotalStudents() {
-		return totalStudents;
+	public Integer getStudId() {
+		return studId;
 	}
 
-	public void setTotalStudents(Integer totalStudents) {
-		this.totalStudents = totalStudents;
-	}
-
-	public Integer getTotalStudentsBehind() {
-		return totalStudentsBehind;
-	}
-
-	public void setTotalStudentsBehind(Integer totalStudentsBehind) {
-		this.totalStudentsBehind = totalStudentsBehind;
-	}
-
-	public StudentDetails getStudDetails() {
-		return studDetails;
-	}
-
-	public void setStudDetails(StudentDetails studDetails) {
-		this.studDetails = studDetails;
+	public void setStudId(Integer studId) {
+		this.studId = studId;
 	}
 
 	@Override
 	public String toString() {
-		return "LoginSuccessDTO [isValid=" + isValid + ", latestTestDetails=" + latestTestDetails + ", studDetails="
-				+ studDetails + ", totalStudents=" + totalStudents + ", totalStudentsBehind=" + totalStudentsBehind
-				+ "]";
+		return "LoginSuccessDTO [isValid=" + isValid + ", userName=" + userName + ", studId=" + studId + "]";
 	}
 
 }

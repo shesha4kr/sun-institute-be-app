@@ -38,24 +38,20 @@ public class LoginController {
 	public LoginSuccessDTO authenticateStudent(@RequestBody StudAuthDetails stud) {
 
 		loadDb.setDbData();
-		
+
 		System.out.println("Entered");
 
 		LoginSuccessDTO loginSuccessDetails = new LoginSuccessDTO();
 
 		StudentDetails studDetails = studentRepo.findByUserName(stud.getUserName());
 
-		if (studDetails != null && studDetails.password.equals(stud.getPassword())) {
-			
-			AITRecord record = mockTestRepo.findLatestMockTest(stud.getUserName()).get(0);
+		if (studDetails != null && studDetails.getPassword().equals(stud.getPassword())) {
 			loginSuccessDetails.setValid(true);
-			loginSuccessDetails.setLatestTestDetails(record);
-			loginSuccessDetails.setStudDetails(studDetails);
-			loginSuccessDetails.setTotalStudents(mockTestRepo.findTotalRecordsForAMocktest(record.getMockTest()));
-			loginSuccessDetails.setTotalStudentsBehind(mockTestRepo.findTotalStudentsBehind(record.getTotalMarks(), record.getMockTest()));
+			loginSuccessDetails.setUserName(studDetails.getFirstName() + " " + studDetails.getLastName());
+			loginSuccessDetails.setStudId(studDetails.getStudId());
 		}
-		
-		System.out.println("Will send this:"+loginSuccessDetails);
+
+		System.out.println("Will send this:" + loginSuccessDetails);
 
 		return loginSuccessDetails;
 	}
