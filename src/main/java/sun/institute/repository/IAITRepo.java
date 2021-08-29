@@ -22,7 +22,8 @@ public interface IAITRepo extends CrudRepository<AITRecord, Integer> {
 	Integer findTotalStudentsBehind(@Param("totalMarks") Integer totalMarks, @Param("mockTest") String mockTest);
 
 	/************** From Student Controller ************************/
-	@Query("SELECT a from AITRecord a WHERE a.userName=:userName")
+
+	@Query("SELECT a from AITRecord a WHERE a.userName=:userName ORDER BY a.mockTest DESC")
 	List<AITRecord> findExamByUserName(@Param("userName") String userName);
 
 }

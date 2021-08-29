@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class AITRecord {
@@ -20,6 +21,12 @@ public class AITRecord {
 	public Integer totalMarks;
 	public String mockTest;
 	public LocalDate dateOfExam;
+
+	@Transient
+	public Integer totalStudents;
+
+	@Transient
+	public Integer totalStudBehind;
 
 	public AITRecord() {
 		super();
@@ -101,11 +108,28 @@ public class AITRecord {
 		this.mockTest = mockTest;
 	}
 
+	public Integer getTotalStudents() {
+		return totalStudents;
+	}
+
+	public void setTotalStudents(Integer totalStudents) {
+		this.totalStudents = totalStudents;
+	}
+
+	public Integer getTotalStudBehind() {
+		return totalStudBehind;
+	}
+
+	public void setTotalStudBehind(Integer totalStudBehind) {
+		this.totalStudBehind = totalStudBehind;
+	}
+
 	@Override
 	public String toString() {
 		return "AITRecord [recordId=" + recordId + ", userName=" + userName + ", logicalMarks=" + logicalMarks
 				+ ", quantMarks=" + quantMarks + ", gkMarks=" + gkMarks + ", totalMarks=" + totalMarks + ", mockTest="
-				+ mockTest + ", dateOfExam=" + dateOfExam + "]";
+				+ mockTest + ", dateOfExam=" + dateOfExam + ", totalStudents=" + totalStudents + ", totalStudBehind="
+				+ totalStudBehind + "]";
 	}
 
 }
