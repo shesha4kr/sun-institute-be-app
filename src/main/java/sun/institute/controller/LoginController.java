@@ -39,8 +39,6 @@ public class LoginController {
 
 		loadDb.setDbData();
 
-		System.out.println("Entered");
-
 		LoginSuccessDTO loginSuccessDetails = new LoginSuccessDTO();
 
 		StudentDetails studDetails = studentRepo.findByUserName(stud.getUserName());
@@ -50,8 +48,6 @@ public class LoginController {
 			loginSuccessDetails.setUserName(studDetails.getFirstName() + " " + studDetails.getLastName());
 			loginSuccessDetails.setStudId(studDetails.getStudId());
 		}
-
-		System.out.println("Will send this:" + loginSuccessDetails);
 
 		return loginSuccessDetails;
 	}
