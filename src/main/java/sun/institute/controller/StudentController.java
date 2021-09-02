@@ -5,22 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-
 import sun.institute.data.LoadDbData;
-import sun.institute.data.LoginSuccessDTO;
-import sun.institute.data.StudAuthDetails;
 import sun.institute.data.StudentProfile;
+import sun.institute.data.ValidatePassword;
 import sun.institute.model.AITRecord;
 import sun.institute.model.StudentDetails;
 import sun.institute.repository.IAITRepo;
@@ -44,6 +40,23 @@ public class StudentController {
 	public List<StudentDetails> getStudents() {
 		loadDb.setDbData();
 		return (List<StudentDetails>) studentRepo.findAll();
+	}
+
+	@PutMapping("/{studId}")
+	public String validatePassword(@PathVariable Integer studId, @RequestBody ValidatePassword validatePassword) {
+		StudentDetails studDetails = studentRepo.findByStudId(studId);
+		try {
+			if (!ObjectUtils.isEmpty(studDetails) && studDetails.getPassword().equals(validatePassword.getPassword())) {
+				int rows = studentRepo.updatePassword(studId, validatePassword.getNewPassword());
+				if (rows == 1) {
+					return "{\"message\"" + ":" + "\"success\"}";
+				}
+			}
+			return "{\"message\"" + ":" + "\"failed\"}";
+		} catch (Exception e) {
+
+			return "{\"message\"" + ":" + "\"failed\"}";
+		}
 	}
 
 	@GetMapping("/profile/{studId}")
@@ -78,7 +91,7 @@ public class StudentController {
 						newProfile.getBirthDate());
 				studentRepo.updateDOB(dob, studId);
 			}
-			
+
 			return "{\"message\"" + ":" + "\"success\"}";
 		} catch (Exception e) {
 			return "{\"message\"" + ":" + "\"failed\"}";

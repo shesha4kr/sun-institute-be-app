@@ -30,5 +30,10 @@ public interface IStudentDetailsRepo extends CrudRepository<StudentDetails, Inte
 	@Transactional
 	@Query("UPDATE StudentDetails s SET s.dob=:dob WHERE s.studId =:studId")
 	Integer updateDOB(@Param("dob") LocalDate dob, @Param("studId") Integer studId);
+	
+	@Modifying
+	@Transactional
+	@Query("UPDATE StudentDetails s SET s.password=:newPassword WHERE s.studId=:studId")
+	Integer updatePassword(@Param("studId") Integer studId, @Param("newPassword") String newPassword);
 
 }
